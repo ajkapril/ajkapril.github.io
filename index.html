@@ -17,17 +17,48 @@
         justify-content: center; /* centres content vertically */
         min-height: 100vh; /* ensure the body takes up 100% of the screen height - important for vertical centring */
       }
-      .container{
-        
+      .container{ /* targets any class="container" */
+        background-color: white; /* makes the background of this box white */
+        padding: 40px; /* add 40 pixels of margin inside the bos */
+        border-radius: 10px; /* rounds the outer corners */
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* adds a semi-transparent drop shadow for 3D effect */
+        text-align: center; /* centres text */
+        max-width: 600px; /* max width of the box */
+        width: 90%; /* box will take up 90% of the screen on smaller devices */
       }
-      h1{}
-      p{}
-      .btn{}
-      .btn:hover{}
+      h1{ /* main title */
+        color: #2c3e50; /* heading text colour - dark blue-grey */
+        margin-bottom: 20px; /* adds empty space below the heading */    
+      }
+      p{ /* text paragraphs */
+        line-height: 1.6; /* increases vertical space between lines */
+        color: #555; /* medium grey */
+        margin-bottom: 30px; /* adds space below paragraph */
+      }
+      .btn{ /* targets any class="btn" */
+        background-color: #3498db; /* blue background */
+        color: white; /* text inside the button - white */
+        border: none; /* removes the default border */
+        padding: 10px 20px; /* adds space around the button */
+        font-size: 16px; /* text size inside the button */
+        cursor: pointer; /* change moue cursor to pointing hand */
+        transition: background-color 0.3s ease; /* smoothly animate changes to the background */
+      }
+      .btn:hover{ /* interactive effect on the button */
+        background-color: #2980b9; /* changes background colour when hovering over the button */
+      }
     </style>
   </head>
   <body>
     <h1>Welcome to ajkapril.github.io!</h1>
-    <p>...</p>
+    <div class="container">
+      <button class="btn" onclick="showMessage()">Click Here</button>
+    </div>
+    <script>
+      function showMessage() {
+        const messageArea = document.getElementById('message-area');
+        messageArea.textContent = "Add something here"
+      }
+    </script>
   </body>
 </html>
