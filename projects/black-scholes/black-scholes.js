@@ -16,6 +16,7 @@ let lastCalculatorInput = null;
 window.addEventListener("DOMContentLoaded", () => {
   setupThemeToggle();
   setupPanels();
+  setupOpenLabButton();
   setupPayoffForm();
   setupCalculatorForm();
 
@@ -66,6 +67,34 @@ function setupPanels() {
         panel.classList.toggle("active-panel", isActive);
         panel.hidden = !isActive;
       });
+    });
+  });
+}
+
+function setupOpenLabButton() {
+  const button = $("#open-lab-button");
+  const target = $("#lab-start");
+  const header = $(".site-header");
+
+  if (!button || !target) {
+    return;
+  }
+
+  button.addEventListener("click", (event) => {
+    event.preventDefault();
+
+    const headerHeight = header ? header.offsetHeight : 0;
+    const extraSpace;
+
+    const targetPosition =
+      target.getBoundingClientRect().top +
+      window.scrolly -
+      headerHeight -
+      extraSpace;
+
+    window.scrollTo({
+      top: targetPosition,
+      behavior: "smooth"
     });
   });
 }
