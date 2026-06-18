@@ -224,6 +224,10 @@ p {
 
 .lab-section {
   padding-top: 1rem;
+  padding-bottom: 50vh;
+}
+#interactive-modules {
+  scroll-margin-top: 90px;
 }
 
 .section-heading {
