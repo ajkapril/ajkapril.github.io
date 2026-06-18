@@ -1,61 +1,292 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
   <head>
-    <meta charet="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ajkapril.github.io</title>
-    <style>
-      body { /*overall styling of webpage */
-        font-family:'Segoe UI'; /* sets the font for the page */
-        background-color: #f4f4f9; /* sets the background colour for the whole page */
-        color: #333; /* sets default text colour to dark grey */
-        margin: 0; /* removes margin */
-        padding: 0; /* removes default inner spacing */
-        display: flex; /* turns on Flexbox - makes aligning elements easy */
-        flex-direction: column; /* tells Flexbos to stack items inside the body vertically */
-        align-items: center; /* centres content horizontally */
-        justify-content: center; /* centres content vertically */
-        min-height: 100vh; /* ensure the body takes up 100% of the screen height - important for vertical centring */
-      }
-      .container{ /* targets any class="container" */
-        background-color: white; /* makes the background of this box white */
-        padding: 40px; /* add 40 pixels of margin inside the bos */
-        border-radius: 10px; /* rounds the outer corners */
-        box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* adds a semi-transparent drop shadow for 3D effect */
-        text-align: center; /* centres text */
-        max-width: 600px; /* max width of the box */
-        width: 90%; /* box will take up 90% of the screen on smaller devices */
-      }
-      h1{ /* main title */
-        color: #2c3e50; /* heading text colour - dark blue-grey */
-        margin-bottom: 20px; /* adds empty space below the heading */    
-      }
-      p{ /* text paragraphs */
-        line-height: 1.6; /* increases vertical space between lines */
-        color: #555; /* medium grey */
-        margin-bottom: 30px; /* adds space below paragraph */
-      }
-      .btn{ /* targets any class="btn" */
-        background-color: #3498db; /* blue background */
-        color: white; /* text inside the button - white */
-        border: none; /* removes the default border */
-        padding: 10px 20px; /* adds space around the button */
-        border-radius: 10px; /* round the corner of the button */
-        font-size: 16px; /* text size inside the button */
-        cursor: pointer; /* change moue cursor to pointing hand */
-        transition: background-color 0.3s ease; /* smoothly animate changes to the background */
-      }
-      .btn:hover{ /* interactive effect on the button */
-        background-color: #2980b9; /* changes background colour when hovering over the button */
-      }
-    </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>ajkapril.github.io | RSA Practice Lab</title>
+
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
   </head>
+
   <body>
-    <h1>Welcome to ajkapril.github.io!</h1>
-    <div class="container">
-      <button class="btn" onclick="showMessage()">Click Here</button>
-      <p id="message-area" style="margin-top: 20px; font-weight: bold; color: #27ae60;"></p>
-    </div>
-    <script src="script.js"></script>
+    <header class="topbar">
+      <a class="brand" href="#">ajkapril.github.io</a>
+
+      <button
+        id="theme-toggle"
+        class="theme-toggle"
+        type="button"
+        aria-pressed="false"
+      >
+        <span id="theme-toggle-text">Dark mode</span>
+      </button>
+    </header>
+
+    <main>
+      <!-- WELCOME SECTION -->
+      <section class="hero">
+        <div class="container hero-card">
+          <p class="eyebrow">RSA Practice Lab</p>
+
+          <h1>Welcome to ajkapril.github.io!</h1>
+
+          <p>
+            Practise RSA encryption and decryption by entering messages, prime
+            numbers, public exponents, and encrypted blocks. The site will show
+            the process step by step.
+          </p>
+
+          <div class="button-row center">
+            <button id="start-rsa" class="btn" type="button">
+              Start RSA practice
+            </button>
+
+            <button id="show-message" class="btn btn-secondary" type="button">
+              Click Here
+            </button>
+          </div>
+
+          <p id="message-area" class="message-area"></p>
+        </div>
+      </section>
+
+      <!-- RSA LAB SECTION -->
+      <section id="rsa-lab" class="rsa-lab">
+        <div class="container-wide">
+          <div class="section-heading">
+            <p class="eyebrow">Interactive study system</p>
+            <h2>RSA encryption and decryption</h2>
+            <p>
+              This is a learning tool only. Showing the private key is useful
+              for practice, but real RSA systems must keep the private key
+              secret.
+            </p>
+          </div>
+
+          <div class="tabs" role="tablist" aria-label="RSA sections">
+            <button
+              id="encrypt-tab"
+              class="tab-button active"
+              type="button"
+              data-tab-target="encrypt-panel"
+              aria-controls="encrypt-panel"
+              aria-selected="true"
+            >
+              Encryption
+            </button>
+
+            <button
+              id="decrypt-tab"
+              class="tab-button"
+              type="button"
+              data-tab-target="decrypt-panel"
+              aria-controls="decrypt-panel"
+              aria-selected="false"
+            >
+              Decryption
+            </button>
+          </div>
+
+          <!-- ENCRYPTION PANEL -->
+          <section
+            id="encrypt-panel"
+            class="tab-panel active-panel"
+            role="tabpanel"
+            aria-labelledby="encrypt-tab"
+            data-tab-panel
+          >
+            <form id="encrypt-form" class="card form-card">
+              <h3>Encrypt a message</h3>
+
+              <label class="field">
+                <span>Message</span>
+                <textarea
+                  id="encrypt-message"
+                  rows="5"
+                  placeholder="Example: HELLO"
+                  required
+                ></textarea>
+              </label>
+
+              <label class="checkbox-field">
+                <input id="auto-values" type="checkbox" checked />
+                <span>Use small automatic demo values</span>
+              </label>
+
+              <div class="number-grid">
+                <label class="field">
+                  <span>p</span>
+                  <input id="encrypt-p" type="number" min="2" placeholder="61" />
+                </label>
+
+                <label class="field">
+                  <span>q</span>
+                  <input id="encrypt-q" type="number" min="2" placeholder="53" />
+                </label>
+
+                <label class="field">
+                  <span>e</span>
+                  <input id="encrypt-e" type="number" min="2" placeholder="17" />
+                </label>
+              </div>
+
+              <label class="field">
+                <span>Block mode</span>
+                <select id="block-mode">
+                  <option value="one-character">One character per block</option>
+                  <option value="auto">Auto block size</option>
+                </select>
+              </label>
+
+              <div class="button-row">
+                <button class="btn" type="submit">Encrypt</button>
+                <button class="btn btn-secondary" type="reset">Clear</button>
+              </div>
+            </form>
+
+            <section class="card result-card" aria-live="polite">
+              <h3>Encryption output</h3>
+
+              <p id="encrypt-status" class="status">
+                No encryption has been run yet.
+              </p>
+
+              <h4>Chosen values</h4>
+
+              <dl class="key-grid">
+                <div>
+                  <dt>p</dt>
+                  <dd id="out-p">—</dd>
+                </div>
+
+                <div>
+                  <dt>q</dt>
+                  <dd id="out-q">—</dd>
+                </div>
+
+                <div>
+                  <dt>n = p × q</dt>
+                  <dd id="out-n">—</dd>
+                </div>
+
+                <div>
+                  <dt>φ(n)</dt>
+                  <dd id="out-phi">—</dd>
+                </div>
+
+                <div>
+                  <dt>e</dt>
+                  <dd id="out-e">—</dd>
+                </div>
+
+                <div>
+                  <dt>d</dt>
+                  <dd id="out-d">Shown later by RSA code</dd>
+                </div>
+              </dl>
+
+              <h4>Encrypted blocks</h4>
+              <pre id="encrypted-blocks" class="output-box">—</pre>
+
+              <h4>Encryption process</h4>
+              <ol id="encrypt-process" class="steps"></ol>
+
+              <h4>Practice packet</h4>
+              <p class="hint">
+                This packet is for study only. IRL never send the
+                private key with the encrypted message.
+              </p>
+
+              <textarea id="share-packet" rows="8" readonly></textarea>
+
+              <div class="button-row">
+                <button id="copy-packet" class="btn btn-secondary" type="button">
+                  Copy packet
+                </button>
+              </div>
+            </section>
+          </section>
+
+          <!-- DECRYPTION PANEL -->
+          <section
+            id="decrypt-panel"
+            class="tab-panel"
+            role="tabpanel"
+            aria-labelledby="decrypt-tab"
+            data-tab-panel
+            hidden
+          >
+            <form id="decrypt-form" class="card form-card">
+              <h3>Decrypt a message</h3>
+
+              <label class="field">
+                <span>Paste practice packet JSON</span>
+                <textarea
+                  id="decrypt-packet"
+                  rows="6"
+                  placeholder="Paste the packet generated by the encryption section"
+                ></textarea>
+              </label>
+
+              <p class="divider-text">or enter values manually</p>
+
+              <label class="field">
+                <span>Encrypted blocks</span>
+                <textarea
+                  id="decrypt-ciphertext"
+                  rows="4"
+                  placeholder="Example: 3000, 28, 2726"
+                ></textarea>
+              </label>
+
+              <div class="number-grid two-columns">
+                <label class="field">
+                  <span>n</span>
+                  <input id="decrypt-n" type="number" min="2" placeholder="3233" />
+                </label>
+
+                <label class="field">
+                  <span>d</span>
+                  <input id="decrypt-d" type="number" min="2" placeholder="2753" />
+                </label>
+              </div>
+
+              <label class="field">
+                <span>Original block widths</span>
+                <input
+                  id="decrypt-block-widths"
+                  type="text"
+                  placeholder="Example: 3, 3, 3"
+                />
+              </label>
+
+              <div class="button-row">
+                <button class="btn" type="submit">Decrypt</button>
+                <button class="btn btn-secondary" type="reset">Clear</button>
+              </div>
+            </form>
+
+            <section class="card result-card" aria-live="polite">
+              <h3>Decryption output</h3>
+
+              <p id="decrypt-status" class="status">
+                No decryption has been run yet.
+              </p>
+
+              <h4>Recovered message</h4>
+              <pre id="decrypted-message" class="output-box">—</pre>
+
+              <h4>Decrypted blocks</h4>
+              <pre id="decrypt-blocks" class="output-box">—</pre>
+
+              <h4>Decryption process</h4>
+              <ol id="decrypt-process" class="steps"></ol>
+            </section>
+          </section>
+        </div>
+      </section>
+    </main>
   </body>
 </html>
