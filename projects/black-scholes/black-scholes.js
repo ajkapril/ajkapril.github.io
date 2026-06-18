@@ -84,11 +84,11 @@ function setupOpenLabButton() {
     event.preventDefault();
 
     const headerHeight = header ? header.offsetHeight : 0;
-    const extraSpace;
+    const extraSpace = 18;
 
     const targetPosition =
       target.getBoundingClientRect().top +
-      window.scrolly -
+      window.scrollY -
       headerHeight -
       extraSpace;
 
