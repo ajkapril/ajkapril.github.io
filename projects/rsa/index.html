@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>RSA Practice Lab | ajkapril.github.io</title>
+
+    <link rel="stylesheet" href="../../styles.css" />
+    <link rel="stylesheet" href="rsa.css" />
+
+    <script src="rsa.js" defer></script>
+  </head>
+
+  <body>
+    <header class="site-header">
+      <a class="logo" href="../../index.html">ajkapril.github.io</a>
+
+      <nav class="main-nav" aria-label="RSA navigation">
+        <a href="../../index.html">Home</a>
+        <a href="../../index.html#projects">Projects</a>
+      </nav>
+
+      <button
+        id="theme-toggle"
+        class="theme-toggle"
+        type="button"
+        aria-pressed="false"
+      >
+        Dark mode
+      </button>
+    </header>
+
+    <main class="rsa-page">
+      <section class="section">
+        <div class="section-inner">
+          <p class="eyebrow">Personal project</p>
+
+          <h1>RSA Practice Lab</h1>
+
+          <p>
+            Practise RSA encryption and decryption using small
+            examples. This page will show the values, block conversion,
+            encryption calculations, and decryption process.
+          </p>
+
+          <p class="warning-box">
+            This is for learning only. Real RSA should not expose the private
+            key, and real cryptography should not be built manually for serious
+            use.
+          </p>
+        </div>
+      </section>
+
+      <section class="section rsa-tool-section">
+        <div class="section-inner">
+          <div class="rsa-layout">
+            <form id="encrypt-form" class="project-card">
+              <h2>Encryption</h2>
+
+              <label class="field">
+                <span>Message to encrypt</span>
+                <textarea
+                  id="encrypt-message"
+                  rows="5"
+                  placeholder="Example: HELLO"
+                ></textarea>
+              </label>
+
+              <div class="number-grid">
+                <label class="field">
+                  <span>p</span>
+                  <input id="encrypt-p" type="number" placeholder="61" />
+                </label>
+
+                <label class="field">
+                  <span>q</span>
+                  <input id="encrypt-q" type="number" placeholder="53" />
+                </label>
+
+                <label class="field">
+                  <span>e</span>
+                  <input id="encrypt-e" type="number" placeholder="17" />
+                </label>
+              </div>
+
+              <button class="btn" type="submit">Encrypt</button>
+            </form>
+
+            <section class="project-card">
+              <h2>Encryption output</h2>
+
+              <p id="encrypt-status">No encryption has been run yet.</p>
+
+              <pre id="encrypt-output" class="output-box">—</pre>
+            </section>
+          </div>
+
+          <div class="rsa-layout">
+            <form id="decrypt-form" class="project-card">
+              <h2>Decryption</h2>
+
+              <label class="field">
+                <span>Encrypted blocks</span>
+                <textarea
+                  id="decrypt-blocks"
+                  rows="5"
+                  placeholder="Example: 3000, 28, 2726"
+                ></textarea>
+              </label>
+
+              <div class="number-grid two-columns">
+                <label class="field">
+                  <span>n</span>
+                  <input id="decrypt-n" type="number" placeholder="3233" />
+                </label>
+
+                <label class="field">
+                  <span>d</span>
+                  <input id="decrypt-d" type="number" placeholder="2753" />
+                </label>
+              </div>
+
+              <button class="btn" type="submit">Decrypt</button>
+            </form>
+
+            <section class="project-card">
+              <h2>Decryption output</h2>
+
+              <p id="decrypt-status">No decryption has been run yet.</p>
+
+              <pre id="decrypt-output" class="output-box">—</pre>
+            </section>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
