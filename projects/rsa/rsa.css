@@ -1,0 +1,79 @@
+.rsa-page h1 {
+  max-width: 850px;
+}
+
+.warning-box {
+  padding: 1rem;
+  border-left: 4px solid var(--accent);
+  border-radius: 12px;
+  background: var(--accent-soft);
+}
+
+.rsa-tool-section {
+  padding-top: 0;
+}
+
+.rsa-layout {
+  display: grid;
+  grid-template-columns: minmax(280px, 420px) minmax(0, 1fr);
+  gap: 1rem;
+  align-items: start;
+  margin-bottom: 1rem;
+}
+
+.field {
+  display: grid;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+}
+
+.field span {
+  font-weight: 700;
+  color: var(--text);
+}
+
+input,
+textarea {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 0.8rem;
+  background: var(--bg);
+  color: var(--text);
+}
+
+textarea {
+  resize: vertical;
+}
+
+.number-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+}
+
+.number-grid.two-columns {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.output-box {
+  min-height: 180px;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--bg);
+  padding: 1rem;
+  color: var(--text);
+}
+
+@media (max-width: 850px) {
+  .rsa-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .number-grid,
+  .number-grid.two-columns {
+    grid-template-columns: 1fr;
+  }
+}
