@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Black–Scholes Lab | ajkapril.github.io</title>
+
+    <link rel="stylesheet" href="black-scholes.css" />
+    <script type="module" src="black-scholes.js" defer></script>
+  </head>
+
+  <body>
+    <header class="site-header">
+      <a class="logo" href="../../index.html">ajkapril.github.io</a>
+
+      <nav class="main-nav" aria-label="Black-Scholes page navigation">
+        <a href="../../index.html">Home</a>
+        <a href="../../index.html#projects">Projects</a>
+      </nav>
+
+      <button id="theme-toggle" class="theme-toggle" type="button" aria-pressed="false">
+        Dark mode
+      </button>
+    </header>
+
+    <main>
+      <section class="hero section">
+        <div class="section-inner hero-grid">
+          <div>
+            <p class="eyebrow">Personal project</p>
+            <h1>Black–Scholes Lab</h1>
+            <p class="lead">
+              An interactive study page for option payoffs, Black–Scholes pricing,
+              Greeks, simulations, hedging, and the pricing PDE.
+            </p>
+
+            <div class="button-row">
+              <a class="btn" href="#lab">Open the lab</a>
+              <a class="btn btn-secondary" href="../../index.html#projects">Back to projects</a>
+            </div>
+          </div>
+
+          <aside class="hero-card">
+            <h2>Learning path</h2>
+            <ol class="mini-list">
+              <li>Option payoffs</li>
+              <li>Black–Scholes calculator</li>
+              <li>Greeks</li>
+              <li>GBM simulation</li>
+              <li>Binomial convergence</li>
+              <li>Delta hedging</li>
+              <li>PDE / heat equation</li>
+            </ol>
+          </aside>
+        </div>
+      </section>
+
+      <section id="lab" class="section lab-section">
+        <div class="section-inner">
+          <div class="section-heading">
+            <p class="eyebrow">Interactive modules</p>
+            <h2>Option pricing from basics to Black–Scholes</h2>
+            <p>
+              This skeleton includes a working payoff visualiser and Black–Scholes calculator.
+              The remaining sections are structured as placeholders so I can build them in stages.
+            </p>
+          </div>
+
+          <div class="lab-layout">
+            <aside class="module-nav" aria-label="Lab modules">
+              <button class="module-button active" type="button" data-panel-target="overview-panel">Overview</button>
+              <button class="module-button" type="button" data-panel-target="payoff-panel">Payoffs</button>
+              <button class="module-button" type="button" data-panel-target="calculator-panel">Calculator</button>
+              <button class="module-button" type="button" data-panel-target="greeks-panel">Greeks</button>
+              <button class="module-button" type="button" data-panel-target="gbm-panel">GBM simulation</button>
+              <button class="module-button" type="button" data-panel-target="binomial-panel">Binomial model</button>
+              <button class="module-button" type="button" data-panel-target="hedging-panel">Delta hedging</button>
+              <button class="module-button" type="button" data-panel-target="pde-panel">PDE / heat equation</button>
+            </aside>
+
+            <div class="panel-area">
+              <section id="overview-panel" class="panel active-panel" data-panel>
+                <article class="card">
+                  <h3>Project overview</h3>
+                  <p>
+                    Building project in layers. Firstly, show what an option pays at maturity,
+                    then add pricing, risk sensitivities, stochastic simulation, and finally the PDE.
+                  </p>
+
+                  <div class="feature-grid">
+                    <div class="feature-card">
+                      <h4>Option Payoffs & Break-Even</h4>
+                      <p>Explain calls, puts, premiums, profit, and breakeven points.</p>
+                    </div>
+                    <div class="feature-card">
+                      <h4>Black-Scholes Pricing</h4>
+                      <p>Compute European call and put prices from the Black–Scholes formula.</p>
+                    </div>
+                    <div class="feature-card">
+                      <h4>Greeks & Risk Sensitivities</h4>
+                      <p>Add Greeks to show how option values respond to input changes.</p>
+                    </div>
+                    <div class="feature-card">
+                      <h4>Simulation, Hedging & PDEs</h4>
+                      <p>Explore GBM paths, binomial convergence, delta hedging, and Black–Scholes PDE visualisations.</p>
+                    </div>
+                  </div>
+                </article>
+              </section>
+
+              <section id="payoff-panel" class="panel" data-panel hidden>
+                <article class="card">
+                  <h3>Option payoff visualiser</h3>
+
+                  <form id="payoff-form" class="control-grid">
+                    <label class="field">
+                      <span>Strike price K</span>
+                      <input id="payoff-k" type="number" min="1" step="1" value="100" />
+                    </label>
+
+                    <label class="field">
+                      <span>Premium</span>
+                      <input id="payoff-premium" type="number" min="0" step="0.01" value="8" />
+                    </label>
+
+                    <label class="field">
+                      <span>Maximum final stock price</span>
+                      <input id="payoff-max-st" type="number" min="10" step="10" value="200" />
+                    </label>
+
+                    <label class="field">
+                      <span>Option type</span>
+                      <select id="payoff-type">
+                        <option value="call">Call</option>
+                        <option value="put">Put</option>
+                      </select>
+                    </label>
+
+                    <label class="field">
+                      <span>Position</span>
+                      <select id="payoff-position">
+                        <option value="long">Long</option>
+                        <option value="short">Short</option>
+                      </select>
+                    </label>
+
+                    <div class="field button-field">
+                      <button class="btn" type="submit">Update payoff</button>
+                    </div>
+                  </form>
+
+                  <div class="chart-card">
+                    <canvas id="payoff-canvas" width="900" height="430" aria-label="Payoff chart"></canvas>
+                  </div>
+
+                  <div id="payoff-explanation" class="explanation-box"></div>
+                </article>
+              </section>
+
+              <section id="calculator-panel" class="panel" data-panel hidden>
+                <article class="card">
+                  <h3>Black–Scholes calculator</h3>
+
+                  <form id="calculator-form" class="control-grid">
+                    <label class="field">
+                      <span>Current stock price S</span>
+                      <input id="bs-s" type="number" min="0.01" step="0.01" value="100" />
+                    </label>
+
+                    <label class="field">
+                      <span>Strike price K</span>
+                      <input id="bs-k" type="number" min="0.01" step="0.01" value="100" />
+                    </label>
+
+                    <label class="field">
+                      <span>Risk-free rate r (%)</span>
+                      <input id="bs-r" type="number" step="0.01" value="5" />
+                    </label>
+
+                    <label class="field">
+                      <span>Volatility σ (%)</span>
+                      <input id="bs-sigma" type="number" min="0.01" step="0.01" value="20" />
+                    </label>
+
+                    <label class="field">
+                      <span>Time to maturity T (years)</span>
+                      <input id="bs-t" type="number" min="0.001" step="0.01" value="1" />
+                    </label>
+
+                    <div class="field button-field">
+                      <button class="btn" type="submit">Calculate</button>
+                    </div>
+                  </form>
+
+                  <div class="results-grid">
+                    <div class="result-tile">
+                      <span>Call price</span>
+                      <strong id="call-price">—</strong>
+                    </div>
+                    <div class="result-tile">
+                      <span>Put price</span>
+                      <strong id="put-price">—</strong>
+                    </div>
+                    <div class="result-tile">
+                      <span>d₁</span>
+                      <strong id="d1-output">—</strong>
+                    </div>
+                    <div class="result-tile">
+                      <span>d₂</span>
+                      <strong id="d2-output">—</strong>
+                    </div>
+                    <div class="result-tile">
+                      <span>N(d₁)</span>
+                      <strong id="nd1-output">—</strong>
+                    </div>
+                    <div class="result-tile">
+                      <span>N(d₂)</span>
+                      <strong id="nd2-output">—</strong>
+                    </div>
+                  </div>
+
+                  <div id="parity-check" class="explanation-box"></div>
+
+                  <div class="chart-card">
+                    <canvas id="value-canvas" width="900" height="430" aria-label="Option value chart"></canvas>
+                  </div>
+                </article>
+              </section>
+
+              <section id="greeks-panel" class="panel" data-panel hidden>
+                <article class="card">
+                  <h3>Greeks visualiser</h3>
+                  <p>
+                    This panel is prepared for Delta, Gamma, Theta, Vega, and Rho. JavaScript
+                    contains helper functions that I will connect to sliders and charts.
+                  </p>
+                  <div id="greeks-output" class="results-grid"></div>
+                  <div class="todo-box">
+                    <h4>Build next</h4>
+                    <ol>
+                      <li>Add sliders for S, T, and σ.</li>
+                      <li>Use the Greeks helper functions in <code>math.js</code>.</li>
+                      <li>Plot each Greek against stock price.</li>
+                    </ol>
+                  </div>
+                </article>
+              </section>
+
+              <section id="gbm-panel" class="panel" data-panel hidden>
+                <article class="card">
+                  <h3>GBM simulation</h3>
+                  <p>
+                    Placeholder for simulated stock-price paths under geometric Brownian motion.
+                  </p>
+                  <div class="todo-box">
+                    <h4>Inputs to add</h4>
+                    <ul>
+                      <li>S₀, μ, σ, T, number of paths, number of steps</li>
+                      <li>Canvas or chart for simulated paths</li>
+                      <li>Histogram of terminal prices Sₜ</li>
+                    </ul>
+                  </div>
+                </article>
+              </section>
+
+              <section id="binomial-panel" class="panel" data-panel hidden>
+                <article class="card">
+                  <h3>Binomial model</h3>
+                  <p>
+                    Placeholder for one-step and multi-step binomial option pricing.
+                  </p>
+                  <div class="todo-box">
+                    <h4>Build next</h4>
+                    <ul>
+                      <li>Compute risk-neutral probability q.</li>
+                      <li>Build stock-price and option-value trees.</li>
+                      <li>Compare binomial price to Black–Scholes as N increases.</li>
+                    </ul>
+                  </div>
+                </article>
+              </section>
+
+              <section id="hedging-panel" class="panel" data-panel hidden>
+                <article class="card">
+                  <h3>Delta hedging simulator</h3>
+                  <p>
+                    Placeholder for showing how a short option position can be hedged by holding Δ shares.
+                  </p>
+                  <div class="todo-box">
+                    <h4>Build next</h4>
+                    <ul>
+                      <li>Simulate one stock path.</li>
+                      <li>Compute delta at every time step.</li>
+                      <li>Rebalance the hedge and track hedging error.</li>
+                    </ul>
+                  </div>
+                </article>
+              </section>
+
+              <section id="pde-panel" class="panel" data-panel hidden>
+                <article class="card">
+                  <h3>PDE / heat equation visualisation</h3>
+                  <p>
+                    Placeholder for the advanced PDE section.
+                  </p>
+                  <div class="formula-box">
+                    V<sub>t</sub> + ½σ²S²V<sub>SS</sub> + rSV<sub>S</sub> − rV = 0
+                  </div>
+                  <div class="todo-box">
+                    <h4>Build last</h4>
+                    <ul>
+                      <li>Show the terminal payoff condition.</li>
+                      <li>Plot a heatmap of V(S, t).</li>
+                      <li>Compare the formula price to a finite-difference PDE approximation.</li>
+                    </ul>
+                  </div>
+                </article>
+              </section>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
